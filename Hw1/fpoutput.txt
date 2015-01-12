@@ -1,0 +1,48 @@
+Function a:
+Iteration 1: p=1.95238095238
+Iteration 2: p=2.12175427379
+Iteration 3: p=2.24284969202
+Iteration 4: p=2.33483967253
+Iteration 5: p=2.4070933802
+Iteration 6: p=2.46505928751
+Iteration 7: p=2.51224346295
+Iteration 8: p=2.55105709638
+Iteration 9: p=2.5832377672
+Iteration 10: p=2.61008144462
+
+Function b:
+Iteration 1: p=7.66666666667
+Iteration 2: p=5.23020373871
+Iteration 3: p=3.7426969187
+Iteration 4: p=2.99485356828
+Iteration 5: p=2.77702222587
+Iteration 6: p=2.75904186642
+Iteration 7: p=2.7589241814
+Iteration 8: p=2.75892417638
+Iteration 9: p=2.75892417638
+Iteration 10: p=2.75892417638
+
+Function c:
+Iteration 1: p=0.0
+Iteration 2: p=0.0
+Iteration 3: p=0.0
+Iteration 4: p=0.0
+Iteration 5: p=0.0
+Iteration 6: p=0.0
+Iteration 7: p=0.0
+Iteration 8: p=0.0
+Iteration 9: p=0.0
+Iteration 10: p=0.0
+
+Function d:
+Iteration 1: p=4.58257569496
+Iteration 2: p=2.14069514293
+Iteration 3: p=3.13207559492
+Iteration 4: p=2.58936652742
+Iteration 5: p=2.84782227445
+Iteration 6: p=2.71552125263
+Iteration 7: p=2.78088509471
+Iteration 8: p=2.74800883838
+Iteration 9: p=2.7643980934
+Iteration 10: p=2.7561912839
+

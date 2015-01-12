@@ -1,0 +1,17 @@
+Iteration 1: p=1.75
+Iteration 2: p=1.625
+Iteration 3: p=1.5625
+Iteration 4: p=1.53125
+Iteration 5: p=1.515625
+Iteration 6: p=1.5078125
+Iteration 7: p=1.51171875
+Iteration 8: p=1.513671875
+Iteration 9: p=1.5126953125
+Iteration 10: p=1.51220703125
+Iteration 11: p=1.511962890625
+Iteration 12: p=1.5120849609375
+Iteration 13: p=1.51214599609375
+Iteration 14: p=1.512115478515625
+Iteration 15: p=1.5121307373046875
+Iteration 16: p=1.5121383666992188
+Iteration 17: p=1.5121345520019531

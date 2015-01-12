@@ -1,0 +1,367 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{enumerate}
+\lstset{breaklines=true}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#1}
+\newcommand{\hmwkDueDate}{January 12, 2015}
+\newcommand{\hmwkClass}{Numerical Analysis}
+\newcommand{\hmwkClassTime}{MWF 2:15}
+\newcommand{\hmwkClassInstructor}{Professor Mohler}
+\newcommand{\hmwkAuthorName}{Rick Sullivan}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+
+    \begin{enumerate}
+        \item[a)] Use three iterations of the bisection method to approximate the root of \(f(x) = \sqrt{x} - \cos{x}\) in [0, 1].
+        \item[a)] How many iterations would be needed to approximate the root with accuracy \(10^{-5}\)?
+    \end{enumerate}
+
+    \textbf{Part a}
+    \\
+    Initially, \(a = 0\), \(b = 1\), and \(p = \frac{1}{2}\).\\
+     \[
+        \begin{split}
+            f(p)*f(a) &= (\sqrt{\frac{1}{2}} - \cos{\frac{1}{2}}) * (\sqrt{0} - \cos{0})
+            \\
+            &= -\frac{1}{\sqrt{2}} + \cos{\frac{1}{2}} \approx 0.1705
+        \end{split}
+    \]   
+
+    Because this is greater than 0, set \(a = p\) and continue.
+    With \(a = \frac{1}{2}\), \(b = 1\), and \(p = \frac{3}{4}\):\\
+     \[
+        \begin{split}
+            f(p)*f(a) &= (\sqrt{\frac{3}{4}} - \cos{\frac{3}{4}}) * (\sqrt{\frac{1}{2}} - \cos{\frac{1}{2}})
+            \\
+            &\approx -0.0229
+        \end{split}
+    \]   
+
+    Because this is less than 0, set \(b = p\) and continue.
+    With \(a = \frac{1}{2}\), \(b = \frac{3}{4}\), and \(p = \frac{5}{8}\):\\
+     \[
+        \begin{split}
+            f(p)*f(a) &= (\sqrt{\frac{5}{8}} - \cos{\frac{5}{8}}) * (\sqrt{\frac{1}{2}} - \cos{\frac{1}{2}})
+            \\
+            &\approx 0.0034
+        \end{split}
+    \]   
+
+    Greater than 0, so \(a = p\).
+    After three iterations we have:      
+    \[
+        \begin{split}
+            p &= \frac{\frac{5}{8} + \frac{3}{4}}{2}
+            \\
+            &= \frac{11}{16} \approx .6875
+        \end{split}
+    \]   
+
+    \textbf{Part b}
+    \\
+    Accuracy can be determined by \(\frac{|b-a|}{2^n}\), where n is the number of iterations.
+
+    Solving for n with accuracy \(10^{-5}\):
+    \[
+        \begin{split}
+        \frac{|1-0|}{2^n} &= 10^{-5}
+        \\
+        2^n &= 10^{5}
+        \\
+        n\log{2} &= \log{10^5}
+        \\
+        n &= \frac{\log{10^5}}{\log{2}}
+        \\
+        &\approx 16.6
+        \end{split}
+    \]   
+
+    In order to meet that accuracy, we must iterate 17 times.
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Write a program to approximate the root of \(3x - e^x\) for \(1 \leq x \leq 2\) within \(10^{-5}\) of the exact solution. Have the program print the estimate at each iteration to the command line. Attach the code to your hw, as well as a print out of the command line.
+    \\
+
+    \textbf{Solution}
+
+    I implemented a root approximation using the bisection method we discussed in class. The code can be found on page \pageref{sec:bisection}.
+    \begin{figure}[here]
+        \centering
+        \lstinputlisting{output.txt}
+        \caption{Command line output from running bisection.py}
+        \label{fig:bisection}
+    \end{figure}
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    \begin{enumerate}
+        \item[a)] Use algebraic manipulation to show that \(g(x) = \left(\frac{x+3}{x^2+2}\right)^{1/2}\) has a fixed point where the function \(f(x) = x^4 + 2x^2 - x - 3\) has a root.
+
+        \item[b)] Perform three fixed point iterations with \(g(x)\) and \(p_0=1\) to approximate the root. Will the fixed point iteration converge?
+    \end{enumerate}
+
+    \textbf{Part a}
+    
+    First, I will solve \(f(x) = 0\) for \(x\).
+    \[
+        \begin{split}
+            x^4 + 2x^2 - x - 3 &= 0 \\
+            x^4 + 2x^2 &= x + 3 \\
+            x^2(x^2 + 2) &= x + 3 \\
+            x^2 &= \frac{x + 3}{x^2 + 2}\\
+            x &= \left(\frac{x + 3}{x^2 + 2}\right)^{1/2} = g(x)\\
+%            x_{n+1} &= \left(\frac{x_n + 3}{x_n^2 + 2}\right)^{1/2}\\
+        \end{split}
+    \]
+
+    Therefore, \(g(x)\) has a fixed point where \(f(x)\) has a root.
+    \\
+
+    \textbf{Part b}
+
+    Iteration one with \(p_0=1\):
+    \[
+        \begin{split}
+            g(1) &= \left(\frac{1 + 3}{1^2 + 2}\right)^{1/2}\\
+            &= \left(\frac{4}{3}\right)^{1/2}\\
+            &= \left(\frac{2}{\sqrt{3}}\right)\\
+            &\approx 1.1547
+        \end{split}
+    \]
+
+    Iteration two with \(p_1=1.1547\):
+    \[
+        \begin{split}
+            g(p_1) &= \left(\frac{1.1547 + 3}{1.1547^2 + 2}\right)^{1/2}\\
+            &\approx 1.1164
+        \end{split}
+    \]
+
+    Iteration three with \(p_2=1.1164\):
+    \[
+        \begin{split}
+            g(p_2) &= \left(\frac{1.1164 + 3}{1.1164^2 + 2}\right)^{1/2}\\
+            &\approx 1.1261
+        \end{split}
+    \]
+
+    This fixed point iteration will converge. It is approaching 1.1241230297, one of the roots of \(f(x)\). We can prove that it will converge by calculating the derivative of \(g(x)\) at the root.
+
+    \[
+        \begin{split}
+            g'(x) &= \frac{-x^2-6 x+2}{2 \sqrt{\frac{x+3}{x^2+2}} (x^2+2)^2}\\
+            |g'(1.124)| &\approx 0.2509
+        \end{split}
+    \]
+
+    This is less than 1, so the approximation will converge.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Rank the following fixed point iteration methods, with \(p_0 = 1\), based upon their apparent speed of convergence for computing \(21^{\frac{1}{3}}\).
+
+    \begin{enumerate}[a)]
+        \item \(g(x) = (20x + 21/x^2)/21\)
+        \item \(g(x) = x - (x^3 - 21)/(3x^2)\) 
+        \item \(g(x) = x - (x^4 - 21x)/(x^2 - 21)\) 
+        \item \(g(x) = (21/x)^{1/2}\) 
+    \end{enumerate}
+
+    \textbf{Solution}
+
+    In decreasing speed of convergence, the fixed point iteration methods are ranked b, d, a, and c.
+    \\
+
+    I created a script to run each of the fixed-point iteration functions to experimentally determine speeds of convergence. The script can be found on page \pageref{sec:fixedpoint}, and the outputs on page \pageref{sec:fpoutput}.
+    \\
+
+%    Using \(p_0 = 1\), function c converges to 0 on its first iteration (and will never converge to actually approximate \(21^{1/3}\). This is due to an unfortunate choice for the first guess of \(p\). 
+
+    We can also analyze derivatives of each of the functions: the closer a derivative at the root is to 0, the faster the function will converge to \(21^{1/3}\). For reference, \(21^{1/3}\) is approximately 2.75892417. 
+    \[
+        \begin{split}
+            a'(x) &= 20/21 + -2/x^3\\
+            |a'(2.7589)| &\approx 0.80671\\
+            \\
+            b'(x) &= 1 - (9x^4 - (x^3 - 21)6x)/(9x^4)\\
+            &= 1 - 1/3 - 126/9x^3\\
+            &= 2/3 - 14/x^3\\
+            |b'(2.7589)| &\approx 0.00001753\\
+            \\
+            c'(x) &= 1 - ((4x^3 - 21)(x^2 - 21) - (x^4 - 21x)(2x))/(x^2 - 21)^2\\
+            |c'(2.7589)| &\approx 5.7053\\
+            \\
+            d'(x) &= -1/2(\sqrt{21}/x^{3/2})\\
+            |d'(2.7589)| &\approx 0.5000\\
+        \end{split}
+    \]
+
+    As expected, \(b'(x)\) is closest to 0 at 2.7589, followed by d and a. \(c'(2.7589)\) is actually greater than 1, so it will not converge.
+
+\end{homeworkProblem}
+
+\pagebreak
+
+\section{Appendix}
+
+\subsection{bisection.py}
+\label{sec:bisection}
+\lstinputlisting[language=python]{bisection.py}
+
+\pagebreak
+
+\subsection{fixedpoint.py}
+\label{sec:fixedpoint}
+\lstinputlisting[language=python]{fixedpoint.py}
+
+\pagebreak
+
+\subsection{Fixed point output}
+\label{sec:fpoutput}
+%The output from testing 10 iterations for each of the fixed point methods.
+\lstinputlisting{fpoutput.txt}
+
+\end{document}
