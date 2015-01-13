@@ -1,0 +1,313 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{enumerate}
+\lstset{breaklines=true}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#2}
+\newcommand{\hmwkDueDate}{January 19, 2015}
+\newcommand{\hmwkClass}{Numerical Analysis}
+\newcommand{\hmwkClassTime}{MWF 2:15}
+\newcommand{\hmwkClassInstructor}{Professor Mohler}
+\newcommand{\hmwkAuthorName}{Rick Sullivan}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Let \(f(x) = -x^3 - \cos{x}\) and \(p_0=1\). Use two iterations of Newtown's method to approximate the root of \(f(x)\).
+\\
+
+    \textbf{Solution}
+
+    Iteration one:
+    \[
+        \begin{split}
+            f'(x) &= -3x^2 + \sin{x}
+        \end{split}
+    \]
+
+    Use the slope at \(x = p_0 = 1\) to approximate the root for our next iteration.
+
+    \[
+        \begin{split}
+            f(1) &\approx -1.5403 \\
+            f'(1) &\approx -2.15853 
+            \\
+            p_1 &= x_0 - \frac{f(x_0)}{f'(x_0)}\\
+            &= 1 - \frac{-1.5403}{-2.15853}\\
+            &= 0.2864
+        \end{split}
+    \]
+
+    Iteration two with \(p_1 = 0.2864\):
+
+    \[
+        \begin{split}
+            f(0.2864) &\approx -0.982759 \\
+            f'(0.2864) &\approx 0.0364182
+            \\
+            p_2 &= x_1 - \frac{f(x_1)}{f'(x_1)}\\
+            &= 0.2864 - \frac{-0.982759}{0.0364182}\\
+            &= 27.98538
+        \end{split}
+    \]
+
+    Our final approximation is 27.9854. This is very innacurate because the slope at our initial choice is nearly 0, pushing our estimation far from the actual root.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+    The derivative of a function can be approximated by 
+    \[
+        \begin{split}
+            f'(x) &\approx \frac{-3f(x) + 4f(x+h) - f(x+2h)}{2h}
+        \end{split}
+    \]
+
+    Show that the error of this approximation is \(O(h^2)\).
+\\
+
+    \textbf{Solution}
+
+    The Taylor series for \(f(x + h)\) and \(f(x + 2h)\) are as follows.
+    \[
+        \begin{split}
+            f(x + h) &= f(x) + hf'(x) + \frac{h^2}{2}f''(x) + \frac{h^3}{6}f'''(x) + Ch^4
+            \\
+            f(x + 2h) &= f(x) + 2hf'(x) + 2h^2f''(x) + (4/3)h^3f'''(x) + Ch^4
+        \end{split}
+    \]
+
+    Using those expansions to calculate the error of the approximation
+ 
+    \[
+        \begin{split}
+            err_h &= f'(x) - \frac{-3f(x) + 4f(x + h) - f(x + 2h)}{2h}
+           \\
+           err_h &= f'(x) - \frac{-3f(x) + 4\left[f(x) + hf'(x) + \frac{h^2}{2}f''(x) + \frac{h^3}{6}f'''(x) + Ch^4\right]}{2h} 
+           \\
+           &\hspace{0.5in} - \frac{\left[f(x) + 2hf'(x) + 2h^2f''(x) + (4/3)h^3f'''(x) + Ch^4\right]}{2h}
+           \\
+            &= f'(x) - \frac{4hf'(x) + 2h^2f''(x) + \frac{2h^3}{3}f'''(x) - 2hf'(x) - 2h^2f''(x) - \frac{4h^3}{3}f'''(x) + Ch^4}{2h}
+            \\
+            &= f'(x) - \frac{2hf'(x) - \frac{2h^3}{3}f'''(x) + Ch^4}{2h}
+            \\
+            &= f'(x) - f'(x) - \frac{h^2}{3}f'''(x) + Ch^3
+            \\
+            &= \frac{h^2}{3}f'''(x) + Ch^3
+        \end{split}
+    \]
+
+    Therefore, the error of this approximation is \(O(h^2)\).
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+    Use the approximation for \(f''(x)\) given in class to approximate the second derivative of
+    \[
+        \begin{split}
+            f(x) &= \cos{e^{x^2} + x^3}
+        \end{split}
+    \]
+
+    at \(x = 1\) using \(h = .1,.05,.025\). How does the decrease in error comapre to the order of accuracy of the method (is the decrease what we should expect)?
+\\
+
+    \textbf{Solution}
+
+    The equation for \(f''(x)\) given in class:
+    \[
+        \begin{split}
+            f''(x) &= \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}
+        \end{split}
+    \]
+
+    Using the specified inputs:
+    \[
+        \begin{split}
+            f''(1)_0.1 &= \frac{f(1+0.1) - 2f(1) + f(1-0.1)}{0.1^2}
+            \\
+            &\approx 0.3534
+            \\
+            f''(1)_0.05 &= \frac{f(1+0.05) - 2f(1) + f(1-0.05)}{0.05^2}
+            \\
+            &\approx 0.1661
+            \\
+            f''(1)_0.025 &= \frac{f(1+0.025) - 2f(1) + f(1-0.025)}{0.025^2}
+            \\
+            &\approx 0.1164
+        \end{split}
+    \]
+
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+    Use the composite trapezoidal rule and Simpson's rule with \(n = 4\) to approximate
+    \[
+        \begin{split}
+            \int_0^1 x^2e^{-x}
+        \end{split}
+    \]
+
+    What is the error of each method?
+\\
+
+    \textbf{Solution}
+
+\end{homeworkProblem}
+
+
+\begin{homeworkProblem}
+    Determine \(c_0\), \(c_1\), and \(c_2\) such that 
+    \[
+        \begin{split}
+            \int_0^2 p(x) dx &= c_0p(0) + c_1p(1) + c_2p(2)
+        \end{split}
+    \]
+
+    for all polynomials \(p(x)\) of degree 2 or less.
+\\
+
+    \textbf{Solution}
+
+\end{homeworkProblem}
+
+
+
+
+
+\pagebreak
+
+\section{Appendix}
+
+\end{document}
