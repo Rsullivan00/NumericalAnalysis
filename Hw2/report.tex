@@ -29,7 +29,7 @@
 
 \pagestyle{fancy}
 \lhead{\hmwkAuthorName}
-\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle}
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle}
 \rhead{\firstxmark}
 \lfoot{\lastxmark}
 \cfoot{\thepage}
@@ -228,7 +228,7 @@
         \end{split}
     \]
 
-    Therefore, the error of this approximation is \(O(h^2)\).
+    If h is small, the first term will be much more significant than any other term in the expansion. Therefore, the error of this approximation is \(O(h^2)\).
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
@@ -239,7 +239,7 @@
         \end{split}
     \]
 
-    at \(x = 1\) using \(h = .1,.05,.025\). How does the decrease in error comapre to the order of accuracy of the method (is the decrease what we should expect)?
+    at \(x = 1\) using \(h = .1,.05,.025\). How does the decrease in error compare to the order of accuracy of the method (is the decrease what we should expect)?
 \\
 
     \textbf{Solution}
@@ -254,20 +254,31 @@
     Using the specified inputs:
     \[
         \begin{split}
-            f''(1)_0.1 &= \frac{f(1+0.1) - 2f(1) + f(1-0.1)}{0.1^2}
+            f''(1)_{0.1} &= \frac{f(1+0.1) - 2f(1) + f(1-0.1)}{0.1^2}
             \\
             &\approx 0.3534
             \\
-            f''(1)_0.05 &= \frac{f(1+0.05) - 2f(1) + f(1-0.05)}{0.05^2}
+            f''(1)_{0.05} &= \frac{f(1+0.05) - 2f(1) + f(1-0.05)}{0.05^2}
             \\
             &\approx 0.1661
             \\
-            f''(1)_0.025 &= \frac{f(1+0.025) - 2f(1) + f(1-0.025)}{0.025^2}
+            f''(1)_{0.025} &= \frac{f(1+0.025) - 2f(1) + f(1-0.025)}{0.025^2}
             \\
             &\approx 0.1164
         \end{split}
     \]
 
+In class, we determined that the calculated errror of this approach is \(O(h^2)]\). Therefore, estimation with choice \(h_1\) should have 4 times the error of an estimation with choice \(h_2 = (1/2)h_1\).
+
+    \[
+        \begin{split}
+            \frac{f''(1)_{0.1}}{f''(1)_{0.05}} = 2.1276
+            \\
+            \frac{f''(1)_{0.05}}{f''(1)_{0.025}} = 1.4270
+        \end{split}
+    \]
+
+ADD SOMETHING HERE. ARE THESE RESULTS CORRECT?
 
 \end{homeworkProblem}
 
@@ -284,8 +295,36 @@
 
     \textbf{Solution}
 
-\end{homeworkProblem}
+    With \(n=4\), we will divide the interval \([0, 1]\) into 4 segments with \(h=0.25\). Using the composite trapezoidal rule:
 
+    \[
+        \begin{split}
+            \int_0^1 x^2e^{-x} &= \sum\limits_{i=0}^3 \frac{1}{4} \frac{f(x_{i}) + f(x_{i+1})}{2}
+        \\
+        &= \frac{1}{8} \left[f(0) + 2f(1/4) + 2f(1/2) + 2f(3/4) + f(1)\right]
+        \\
+        &= \frac{1}{8} \left[1 + \frac{1}{8e^{1/4}} + \frac{1}{2e^{1/2}} + \frac{9}{8e^{3/4}} + \frac{1}{e} \right]
+        \\
+        &\approx 0.2848
+        \end{split}
+    \]
+
+
+    Using the composite Simpson's rule:
+
+    \[
+        \begin{split}
+            \int_0^1 x^2e^{-x} &= \sum\limits_{i=0}^1 \frac{0.25}{3} \left[f(x_{2i}) + 4f(x_{2i+1}) + f(x_{2i+2})\right]
+        \\
+        &= \frac{1}{12} \left[(1 + \frac{1}{4e^{1/4}} + \frac{1}{4e^{1/2}}) + (\frac{1}{4e^{1/2}} + \frac{9}{4e^{3/4}} + \frac{1}{e})\right] 
+        \\
+        &\approx 0.2441
+        \end{split}
+    \]
+
+    TODO: ENTER ERROR OF THIS METHOD
+    % Wolfram alpha answer: ~~ 0.16060
+\end{homeworkProblem}
 
 \begin{homeworkProblem}
     Determine \(c_0\), \(c_1\), and \(c_2\) such that 
@@ -300,14 +339,22 @@
 
     \textbf{Solution}
 
+    Simpson's rule provides exact estimation for polynomials up to degree 3.
+
+    \[
+        \begin{split}
+            \int_0^2 p(x) dx &\approx \frac{1}{3} \left[p(0) + 4p(1) + p(2)\right]
+            \\
+        &= \frac{1}{3}p(0) + \frac{4}{3}p(1) + \frac{1}{3}p(2)
+            \\
+        \end{split}
+    \]
+
+    Therefore, \(c_0=1/3\), \(c_1=4/3\), and \(c_2=1/3\).
+
+
 \end{homeworkProblem}
-
-
-
-
-
-\pagebreak
-
-\section{Appendix}
+%\pagebreak
+%\section{Appendix}
 
 \end{document}
