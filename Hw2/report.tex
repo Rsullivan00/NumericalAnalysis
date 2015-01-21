@@ -90,7 +90,7 @@
 %
 
 \newcommand{\hmwkTitle}{Homework\ \#2}
-\newcommand{\hmwkDueDate}{January 19, 2015}
+\newcommand{\hmwkDueDate}{January 21, 2015}
 \newcommand{\hmwkClass}{Numerical Analysis}
 \newcommand{\hmwkClassTime}{MWF 2:15}
 \newcommand{\hmwkClassInstructor}{Professor Mohler}
@@ -235,7 +235,7 @@
     Use the approximation for \(f''(x)\) given in class to approximate the second derivative of
     \[
         \begin{split}
-            f(x) &= \cos{e^{x^2} + x^3}
+            f(x) &= \cos{(e^{x^2} + x^3)}
         \end{split}
     \]
 
@@ -255,30 +255,34 @@
     \[
         \begin{split}
             f''(1)_{0.1} &= \frac{f(1+0.1) - 2f(1) + f(1-0.1)}{0.1^2}
+            % = -0.0279007 - 2(-0.838272) + -0.98647 / 0.1^2
             \\
-            &\approx 0.3534
+            &\approx 66.2173
             \\
             f''(1)_{0.05} &= \frac{f(1+0.05) - 2f(1) + f(1-0.05)}{0.05^2}
+            % (-0.516774 - 2(-0.8382272) + -0.983566)/0.05^2
             \\
-            &\approx 0.1661
+            &\approx 70.4458
             \\
             f''(1)_{0.025} &= \frac{f(1+0.025) - 2f(1) + f(1-0.025)}{0.025^2}
+            % (-0.700473 - 2(-0.8382272) + -0.931387)/0.025^2
             \\
-            &\approx 0.1164
+            &\approx 71.3510
         \end{split}
     \]
 
-In class, we determined that the calculated errror of this approach is \(O(h^2)]\). Therefore, estimation with choice \(h_1\) should have 4 times the error of an estimation with choice \(h_2 = (1/2)h_1\).
+In class, we determined that the calculated errror of this approach is \(O(h^2)\). 
+Therefore, estimation with choice \(h_1\) should have 4 times the error of an estimation with choice \(h_2 = (1/2)h_1\).
 
     \[
         \begin{split}
-            \frac{f''(1)_{0.1}}{f''(1)_{0.05}} = 2.1276
-            \\
-            \frac{f''(1)_{0.05}}{f''(1)_{0.025}} = 1.4270
+            \frac{f''(1)_{0.1} - f''(1)_{0.05}}{f''(1)_{0.05} - f''(1)_{0.025}} &= \frac{66.2173 - 70.4458}{70.4458 - 71.3510} \\
+                                                                                &= 4.6713
         \end{split}
     \]
 
-ADD SOMETHING HERE. ARE THESE RESULTS CORRECT?
+    As expected, our approximation seems to have an accuracy of order \(O(h^2)\).
+
 
 \end{homeworkProblem}
 
@@ -322,8 +326,13 @@ ADD SOMETHING HERE. ARE THESE RESULTS CORRECT?
         \end{split}
     \]
 
-    TODO: ENTER ERROR OF THIS METHOD
     % Wolfram alpha answer: ~~ 0.16060
+    The error of the composite trapezoidal rule is bounded by
+    \[
+        \begin{split}
+            something
+        \end{split}
+    \]
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
