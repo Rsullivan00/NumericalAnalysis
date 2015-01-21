@@ -307,9 +307,9 @@ Therefore, estimation with choice \(h_1\) should have 4 times the error of an es
         \\
         &= \frac{1}{8} \left[f(0) + 2f(1/4) + 2f(1/2) + 2f(3/4) + f(1)\right]
         \\
-        &= \frac{1}{8} \left[1 + \frac{1}{8e^{1/4}} + \frac{1}{2e^{1/2}} + \frac{9}{8e^{3/4}} + \frac{1}{e} \right]
+        &= \frac{1}{8} \left[0 + \frac{1}{8e^{1/4}} + \frac{1}{2e^{1/2}} + \frac{9}{8e^{3/4}} + \frac{1}{e} \right]
         \\
-        &\approx 0.2848
+        &\approx 0.1598
         \end{split}
     \]
 
@@ -320,19 +320,15 @@ Therefore, estimation with choice \(h_1\) should have 4 times the error of an es
         \begin{split}
             \int_0^1 x^2e^{-x} &= \sum\limits_{i=0}^1 \frac{0.25}{3} \left[f(x_{2i}) + 4f(x_{2i+1}) + f(x_{2i+2})\right]
         \\
-        &= \frac{1}{12} \left[(1 + \frac{1}{4e^{1/4}} + \frac{1}{4e^{1/2}}) + (\frac{1}{4e^{1/2}} + \frac{9}{4e^{3/4}} + \frac{1}{e})\right] 
+        &= \frac{1}{12} \left[(0 + \frac{1}{4e^{1/4}} + \frac{1}{4e^{1/2}}) + (\frac{1}{4e^{1/2}} + \frac{9}{4e^{3/4}} + \frac{1}{e})\right] 
         \\
-        &\approx 0.2441
+        &\approx 0.1608
         \end{split}
     \]
 
     % Wolfram alpha answer: ~~ 0.16060
-    The error of the composite trapezoidal rule is bounded by
-    \[
-        \begin{split}
-            something
-        \end{split}
-    \]
+    The actual solution is close to 0.1606. The error of the composite trapezoidal estimation is then about 0.0008.
+    And the error using the composite Simpson's rule is about 0.0002.
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
