@@ -1,0 +1,366 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{enumerate}
+\lstset{breaklines=true}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#3}
+\newcommand{\hmwkDueDate}{February 2, 2015}
+\newcommand{\hmwkClass}{Numerical Analysis}
+\newcommand{\hmwkClassTime}{MWF 2:15}
+\newcommand{\hmwkClassInstructor}{Professor Mohler}
+\newcommand{\hmwkAuthorName}{Rick Sullivan}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Use Modified Euler's method to approximate the solution to
+
+    \[
+        \begin{split}
+            y' &= \cos(yt), y(0) = 3
+        \end{split}
+    \]
+
+    on the interval \([0,2]\) with \(h=.5\).
+    \\
+
+    \textbf{Solution}
+
+    \[
+        \begin{split}
+            \frac{w_{i+1}-w_i}{h} &= \frac{f(t_{i+1}, \widetilde{w}_{i+1}) + f(t_i, w_i)}{2}
+            \\
+            f(t_{i+1}, \widetilde{w}_{i+1}) &= \frac{2(w_{i+1}-w_i)}{h} - f(t_i, w_i)
+            \\
+            \widetilde{w}_{i+1} &= w_i + hf(t_i, w_i)
+            \\
+            w_1 &= 3 + .5(\cos(0*3))
+            \\
+            &= 3 + .5
+            \\
+            &= 3.5
+            \\
+            y(.5) &= \frac{2(3.5-3)}{.5} - y(0)
+            \\
+            &= 2 - 3
+            \\
+            &= -1
+            \\
+            w_2 &= 3.5 + .5(-1)
+            \\
+            &= 3
+            \\
+            y(1) &= \frac{2(3-3.5)}{.5} - (-1)
+            \\
+            &= -1 + 1
+            \\
+            &= 0
+            \\
+            w_3 &= 3 + .5(0)
+            \\
+            &= 3
+            \\
+            y(1.5) &= \frac{2(3-3)}{.5} - 0
+            \\
+            &= 0
+            \\
+            w_4 &= 3 - .5(0)
+            \\
+            &= 3
+            \\
+            y(2) &= \frac{2(3-3)}{.5} - 0
+            \\
+            &= 0
+        \end{split}
+    \]
+
+    The approximation of the solution converges to 0 on the given interval.
+\end{homeworkProblem}
+
+\pagebreak
+
+\begin{homeworkProblem}
+    Consider the initial value problem
+
+    \[
+        \begin{split}
+            y' &= -200y + \cos(t), y(0) = 1
+        \end{split}
+    \]
+
+    \begin{enumerate}[a)]
+        \item What happens to Forward Euler's method if \(h=.1\) is used? Compute a few iterations and discuss the results.
+
+        \item What condition is needed on \(h\) for Forward Euler's method to give reasonable results?
+
+        \item What is a method that doesn't have this restriction on \(h\)? Use this method to approximate \(y(.2)\).
+    \end{enumerate}
+
+    \textbf{Part a}
+    \\
+
+    \[
+        \begin{split}
+            y_{i+1} &= y_i + hy'(t_i, y_i)
+            \\
+            y(.1) &= y(0) + .1y'(0, 1) \\
+                  &= 1 + .1(-199) \\
+                  &= -18.9 \\
+            y(.2) &= y(.1) + .1f(.1, -18.9) \\
+                  &= -18.9 + .1(3781) \\
+                  &= 359.2 \\
+            y(.3) &= y(.2) + .1f(.2, 359.2) \\
+                  &= 359.2 + .1(-71839) \\
+                  &= -6824.7
+        \end{split}
+    \]
+
+    The estimations are diverging and oscillating.
+    \\
+
+    \textbf{Part b}
+    \\
+
+    \textbf{Part c}
+    \\
+
+    Runga-Kutta methods don't have this stability problem.
+    \[
+        \begin{split}
+            k_1 &= .1y'(0, 1)\\
+                &= .1(-199) \\
+                &= -19.9 \\
+            k_2 &= .1y'(.05, 1 + k_1/2) \\
+              &= .1y'(.05, -8.95) \\
+              &= .1(1791) \\
+              &= 179.1 \\
+            k_3 &= .1y'(.05, 1 + k_2/2) \\
+                &= .1y'(.05, 89.65) \\
+                &= .1(-17929) \\
+                &= -1792.9\\
+            k_4 &= .1y'(.1, 1 + k_3) \\
+                &= .1y'(.1, -1791.9) \\
+                &= 35857.8 \\
+            y(.1) &= 1 + \frac{k_1 + k_2 + k_3 + k_4}{6}\\
+        &= 5680.12167
+        \end{split}
+    \]
+
+    Trying Modified Euler:
+
+    \[
+        \begin{split}
+            w_0 &= 0
+            \\
+            w_1 &= 0 + .1(1)
+            \\
+            &= .1
+            \\
+            y(.1) &= \frac{2(.1-0)}{.1} - 1
+            \\
+            &= 1
+            \\
+            w_2 &= .1 + .1(1)
+            \\
+            &= .2
+            \\
+            y(.2) &= \frac{2(.2-1)}{.1} - 1
+            \\
+            &= 1
+        \end{split}
+    \]
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+    Lotka-Volterra equations are used to model predator-prey systems. For example
+
+    \[
+        \begin{split}
+            c' &= .01cr - .5c
+        \end{split}
+    \]
+    and
+    \[
+        \begin{split}
+            r' &= 2r - .02cr
+        \end{split}
+    \]
+
+    might model a population of coyotes and rabbits. Use Forward Euler and \(h=.5\) to estimate the populations at time \(t=1\) if \(c(0)=r(0)=100\).
+    \\
+
+    \textbf{Solution}
+    \\
+
+    \[
+        \begin{split}
+            c(.5) &= 100 + .5(.01(100)(100) - .5(100))
+            \\
+            &= 100 + .5(50)
+            \\
+            &= 125
+            \\
+            r(.5) &= 100 + .5(2(100) - .02(100)(100))
+            \\
+            &= 100 + .5(200 - 200)
+            \\
+            &= 100
+            \\
+            c(1) &= c_{.5} + .5(.01c_{.5}r_{.5} - .5c_{.5})
+            \\
+            &= 125 + .5(.01(125)(100) - .5(125))
+            \\
+            &= 125 + .5(125 - 62.5)
+            \\
+            &= 125 + 31.25
+            \\
+            &= 156.25
+            \\
+            r(1) &= r_{.5} + .5(2r_{.5} - .02r_{.5}c_{.5})
+            \\
+            &= 100 + .5(2(100) - .02(100)(125))
+            \\
+            &= 100 + .5(200 - 250)
+            \\
+            &= 75
+        \end{split}
+    \]
+
+    Our final estimations using Forward Euler have \(c(1) = 156.25\) and \(r(1) = 75\).
+\end{homeworkProblem}
+%\pagebreak
+%\section{Appendix}
+
+\end{document}
