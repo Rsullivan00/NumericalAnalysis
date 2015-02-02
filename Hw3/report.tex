@@ -253,32 +253,38 @@
     \textbf{Part b}
     \\
 
+    Forward Euler can be unstable for certain problems if we do not choose a small enough values for \(h\).
+    In general, for equations of the form \(y' = ky\), we want the product \(hk\) to have an absolute value of between 0 and 1.
+    The first term of the equation in this problem has \(k=-200\), so \(h\) would have to be less than or equal to \(.005\).
+    \\
+
     \textbf{Part c}
     \\
 
-    Runga-Kutta methods don't have this stability problem.
-    \[
-        \begin{split}
-            k_1 &= .1y'(0, 1)\\
-                &= .1(-199) \\
-                &= -19.9 \\
-            k_2 &= .1y'(.05, 1 + k_1/2) \\
-              &= .1y'(.05, -8.95) \\
-              &= .1(1791) \\
-              &= 179.1 \\
-            k_3 &= .1y'(.05, 1 + k_2/2) \\
-                &= .1y'(.05, 89.65) \\
-                &= .1(-17929) \\
-                &= -1792.9\\
-            k_4 &= .1y'(.1, 1 + k_3) \\
-                &= .1y'(.1, -1791.9) \\
-                &= 35857.8 \\
-            y(.1) &= 1 + \frac{k_1 + k_2 + k_3 + k_4}{6}\\
-        &= 5680.12167
-        \end{split}
-    \]
+%    Runga-Kutta methods don't have this stability problem.
+%    \[
+%        \begin{split}
+%            k_1 &= .1y'(0, 1)\\
+%                &= .1(-199) \\
+%                &= -19.9 \\
+%            k_2 &= .1y'(.05, 1 + k_1/2) \\
+%              &= .1y'(.05, -8.95) \\
+%              &= .1(1791) \\
+%              &= 179.1 \\
+%            k_3 &= .1y'(.05, 1 + k_2/2) \\
+%                &= .1y'(.05, 89.65) \\
+%                &= .1(-17929) \\
+%                &= -1792.9\\
+%            k_4 &= .1y'(.1, 1 + k_3) \\
+%                &= .1y'(.1, -1791.9) \\
+%                &= 35857.8 \\
+%            y(.1) &= 1 + \frac{k_1 + k_2 + k_3 + k_4}{6}\\
+%        &= 5680.12167
+%        \end{split}
+%    \]
 
-    Trying Modified Euler:
+    The modified (midpoint) Euler method we have covered eliminates this restriction on h. 
+    Using that method, we have
 
     \[
         \begin{split}
@@ -302,6 +308,8 @@
         \end{split}
     \]
 \end{homeworkProblem}
+
+\pagebreak
 
 \begin{homeworkProblem}
     Lotka-Volterra equations are used to model predator-prey systems. For example
