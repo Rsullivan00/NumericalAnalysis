@@ -1,0 +1,324 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{enumerate}
+\lstset{breaklines=true}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#4}
+\newcommand{\hmwkDueDate}{February 9, 2015}
+\newcommand{\hmwkClass}{Numerical Analysis}
+\newcommand{\hmwkClassTime}{MWF 2:15}
+\newcommand{\hmwkClassInstructor}{Professor Mohler}
+\newcommand{\hmwkAuthorName}{Rick Sullivan}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    \begin{enumerate}[a)]
+        \item Use the Gaussian elimination algorithm discussed in class to put the following augmented matrix into triangular (reduced) form.
+
+            \[
+                \begin{split}
+                    A &=
+                    \begin{bmatrix}
+                        1 & -1 & 3 & 2\\
+                        3 & -3 & 1 & -1\\
+                        1 & 1 & 0 & 3\\
+                    \end{bmatrix}
+                \end{split}
+            \]
+
+        \item Use backward substitution to solve the system.
+    \end{enumerate}
+
+
+    \textbf{Part a}
+    \\
+         \[
+            \begin{split}
+                A &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    3 & -3 & 1 & -1\\
+                    1 & 1 & 0 & 3\\
+                \end{bmatrix}
+                \\
+                &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    1 & -1 & 1/3 & -1/3\\
+                    1 & 1 & 0 & 3\\
+                \end{bmatrix}
+                \\
+                &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    0 & 0 & 8/3 & 7/3\\
+                    1 & 1 & 0 & 3\\
+                \end{bmatrix}
+                \\
+                &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    0 & 0 & 1 & 7/8\\
+                    1 & 1 & 0 & 3\\
+                \end{bmatrix}
+                \\
+                &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    1 & 1 & 0 & 3\\
+                    0 & 0 & 1 & 7/8\\
+                \end{bmatrix}
+                \\
+                &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    0 & 2 & -3 & 1\\
+                    0 & 0 & 1 & 7/8\\
+                \end{bmatrix}
+                \\
+                &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    0 & 1 & -3/2 & 1/2\\
+                    0 & 0 & 1 & 7/8\\
+                \end{bmatrix}
+                \\
+               &=
+                \begin{bmatrix}
+                    1 & 0 & 0 & 19/16\\
+                    0 & 1 & 0 & 29/16\\
+                    0 & 0 & 1 & 7/8\\
+                \end{bmatrix}
+            \end{split}
+        \]
+   
+    \textbf{Part b}
+    \\
+
+    \[
+        A &=
+        \begin{split}
+            \begin{bmatrix}
+                1 & -1 & 3 & 2\\
+                0 & 1 & -3/2 & 1/2\\
+                0 & 0 & 1 & 7/8\\
+            \end{bmatrix}
+            \\
+            &=
+             \begin{bmatrix}
+                1 & -1 & 3 & 2\\
+                0 & 1 & 0 & 29/16\\
+                0 & 0 & 1 & 7/8\\
+            \end{bmatrix}
+            \\
+            &=
+            \begin{bmatrix}
+                1 & 0 & 0 & 19/16\\
+                0 & 1 & 0 & 29/16\\
+                0 & 0 & 1 & 7/8\\
+            \end{bmatrix}
+
+        \end{split}<++>
+    \]
+
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+    \begin{enumerate}[a)]
+        \item Factor the matrix
+            \[
+                \begin{split}
+                    A &=
+                    \begin{bmatrix}
+                        4 & 0 & 0\\
+                        2 & 8 & 2\\
+                        4 & 4 & 16\\
+                    \end{bmatrix}
+                \end{split}
+            \]
+            into the product of a lower and upper triangular matrix.
+
+        \item Solve the linear system \(Ax = b\), where \(b\) is the vector of all 1's, using \(A = LU\) from part a) and forward/backward substitution.
+    \end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+        Let
+            \[
+                \begin{split}
+                    A &=
+                    \begin{bmatrix}
+                        \alpha & 1 & 0\\
+                        \beta & 2 & 1\\
+                        0 & 1 & 2\\
+                    \end{bmatrix}
+                \end{split}
+            \]
+        Find all values of \(\alpha\) and \(\beta\) such that 
+        \begin{enumerate}[a)]
+            \item A is singular (non-invertible)
+            \item A is symmetric
+            \item A is strictly diagonally dominant
+            \item A is positive definite
+        \end{enumerate}
+
+        \textbf{Solution}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+    \begin{enumerate}[a)]
+        \item Find \(||x||_\infty\) and \(||x||_2\) for \(x=[\cos(k),\sin(k),e^k]^T\) and a \(k\) a positive integer.
+
+        \item Find \(||A||_\infty\) for
+            \[
+                \begin{split}
+                    A &=
+                    \begin{bmatrix}
+                        2 & -1 & 0\\
+                        -1 & 2 & -1\\
+                        0 & -1 & 2\\
+                    \end{bmatrix}
+                \end{split}
+            \]
+    \end{enumerate}
+\end{homeworkProblem}
+
+
+%\pagebreak
+%\section{Appendix}
+
+\end{document}

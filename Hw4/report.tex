@@ -1,0 +1,506 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{enumerate}
+\lstset{breaklines=true}
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName}
+\chead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+\newcounter{homeworkProblemCounter}
+\setcounter{homeworkProblemCounter}{1}
+\nobreak\extramarks{Problem \arabic{homeworkProblemCounter}}{}\nobreak{}
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+\newenvironment{homeworkProblem}[1][-1]{
+    \ifnum#1>0
+        \setcounter{homeworkProblemCounter}{#1}
+    \fi
+    \section{Problem \arabic{homeworkProblemCounter}}
+    \setcounter{partCounter}{1}
+    \enterProblemHeader{homeworkProblemCounter}
+}{
+    \exitProblemHeader{homeworkProblemCounter}
+}
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework\ \#4}
+\newcommand{\hmwkDueDate}{February 11, 2015}
+\newcommand{\hmwkClass}{Numerical Analysis}
+\newcommand{\hmwkClassTime}{MWF 2:15}
+\newcommand{\hmwkClassInstructor}{Professor Mohler}
+\newcommand{\hmwkAuthorName}{Rick Sullivan}
+
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+    \vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+\begin{homeworkProblem}
+    \begin{enumerate}[a)]
+        \item Use the Gaussian elimination algorithm discussed in class to put the following augmented matrix into triangular (reduced) form.
+
+            \[
+                \begin{split}
+                    A &=
+                    \begin{bmatrix}
+                        1 & -1 & 3 & 2\\
+                        3 & -3 & 1 & -1\\
+                        1 & 1 & 0 & 3\\
+                    \end{bmatrix}
+                \end{split}
+            \]
+
+        \item Use backward substitution to solve the system.
+    \end{enumerate}
+
+
+    \textbf{Part a}
+    \\
+         \[
+            \begin{split}
+                A &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    3 & -3 & 1 & -1\\
+                    1 & 1 & 0 & 3\\
+                \end{bmatrix}
+                \\
+                &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    1 & -1 & 1/3 & -1/3\\
+                    1 & 1 & 0 & 3\\
+                \end{bmatrix}
+                \\
+                &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    0 & 0 & 8/3 & 7/3\\
+                    1 & 1 & 0 & 3\\
+                \end{bmatrix}
+                \\
+                &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    0 & 0 & 1 & 7/8\\
+                    1 & 1 & 0 & 3\\
+                \end{bmatrix}
+                \\
+                &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    1 & 1 & 0 & 3\\
+                    0 & 0 & 1 & 7/8\\
+                \end{bmatrix}
+                \\
+                &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    0 & 2 & -3 & 1\\
+                    0 & 0 & 1 & 7/8\\
+                \end{bmatrix}
+                \\
+                &=
+                \begin{bmatrix}
+                    1 & -1 & 3 & 2\\
+                    0 & 1 & -3/2 & 1/2\\
+                    0 & 0 & 1 & 7/8\\
+                \end{bmatrix}
+            \end{split}
+        \]
+   
+    \textbf{Part b}
+    \\
+
+    \[
+        \begin{split}
+            A &=
+            \begin{bmatrix}
+                1 & -1 & 3 & 2\\
+                0 & 1 & -3/2 & 1/2\\
+                0 & 0 & 1 & 7/8\\
+            \end{bmatrix}
+            \\
+            &=
+             \begin{bmatrix}
+                1 & -1 & 3 & 2\\
+                0 & 1 & 0 & 29/16\\
+                0 & 0 & 1 & 7/8\\
+            \end{bmatrix}
+            \\
+            &=
+            \begin{bmatrix}
+                1 & 0 & 0 & 19/16\\
+                0 & 1 & 0 & 29/16\\
+                0 & 0 & 1 & 7/8\\
+            \end{bmatrix}
+        \end{split}
+    \]
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+    \begin{enumerate}[a)]
+        \item Factor the matrix
+            \[
+                \begin{split}
+                    A &=
+                    \begin{bmatrix}
+                        4 & 0 & 0\\
+                        2 & 8 & 2\\
+                        4 & 4 & 16\\
+                    \end{bmatrix}
+                \end{split}
+            \]
+            into the product of a lower and upper triangular matrix.
+
+        \item Solve the linear system \(Ax = b\), where \(b\) is the vector of all 1's, using \(A = LU\) from part a) and forward/backward substitution.
+    \end{enumerate}
+
+    \textbf{Part a}
+    \\
+        \[
+            \begin{split}
+                A &=
+                \begin{bmatrix}
+                    4 & 0 & 0\\
+                    2 & 8 & 2\\
+                    4 & 4 & 16\\
+                \end{bmatrix}
+                = 
+                \begin{bmatrix}
+                    l_{1,1} & 0 & 0\\
+                    l_{2,1} & l_{2,2} & 0\\
+                    0 & l_{3,2} & l_{3,3}\\
+                \end{bmatrix}
+                \begin{bmatrix}
+                    1 & u_{1,2} & 0\\
+                    0 & 1 & u_{2,3}\\
+                    0 & 0 & 1\\
+                \end{bmatrix}
+                \\
+                l_{1,1} &= 4
+                \\
+                2 &= l_{2,1} * 1
+                \\
+                l_{2,1} &= 2
+                \\
+                0 &= 4 * u_{1,2}
+                \\
+                u_{1,2} &= 0
+            \end{split}
+        \]
+
+        So we now have 
+        \[
+            \begin{split}
+                A &=
+                \begin{bmatrix}
+                    4 & 0 & 0\\
+                    2 & l_{2,2} & 0\\
+                    0 & l_{3,2} & l_{3,3}\\
+                \end{bmatrix}
+                \begin{bmatrix}
+                    1 & 0 & 0\\
+                    0 & 1 & u_{2,3}\\
+                    0 & 0 & 1\\
+                \end{bmatrix}
+                \\
+                8 &= 2 * 0 + l_{2,2} * 1
+                \\
+                l_{2,2} &= 8
+                \\
+                2 &= 8 * u_{2,3}
+                \\
+                u_{2,3} &= 1/4
+                \\
+                4 &= 1 * l_{3,2} 
+                \\
+                l_{3,2} &= 4
+                \\
+                16 &= 4 * (1/4) + 1 * l_{3,3}
+                \\
+                l_{3,3} &= 15
+            \end{split}
+        \]
+
+        Finally,
+        \[
+            \begin{split}
+                A &=
+                \begin{bmatrix}
+                    4 & 0 & 0\\
+                    2 & 8 & 0\\
+                    0 & 4 & 15\\
+                \end{bmatrix}
+                \begin{bmatrix}
+                    1 & 0 & 0\\
+                    0 & 1 & 1/4\\
+                    0 & 0 & 1\\
+                \end{bmatrix}
+            \end{split}
+        \]
+
+
+    \textbf{Part b}
+    \\
+
+    \[
+        \begin{split}
+            Ax = LUx &= b 
+            \\
+        \end{split}
+    \]
+    First solving for \(y\) in \(Ly=b\).
+    \[
+        \begin{split}
+            \begin{bmatrix}
+                4 & 0 & 0\\
+                2 & 8 & 0\\
+                0 & 4 & 15\\
+            \end{bmatrix}
+            \begin{bmatrix}
+                y_1\\
+                y_2\\
+                y_3\\
+            \end{bmatrix}      
+            &= 
+            \begin{bmatrix}
+                1\\
+                1\\
+                1\\
+            \end{bmatrix}      
+            \\
+            1 &= 4y_1
+            \\
+            y_1 &= 1/4
+            \\
+            1 &= 2(1/4) + 8y_2
+            \\
+            y_2 &= 1/16
+            \\
+            1 &= 4(1/16) + 15y_3
+            \\
+            y_3 &= 1/20
+        \end{split}
+    \]
+    Now solving for \(x\) in \(Ux=y\).
+    \[
+        \begin{split}
+            \begin{bmatrix}
+                1 & 0 & 0\\
+                0 & 1 & 1/4\\
+                0 & 0 & 1\\
+            \end{bmatrix}
+            \begin{bmatrix}
+                x_1\\
+                x_2\\
+                x_3\\
+            \end{bmatrix}      
+            &=
+            \begin{bmatrix}
+                1/4\\
+                1/16\\
+                1/20\\
+            \end{bmatrix}      
+            \\
+            x_1 &= 1/4
+            \\
+            x_3 &= 1/20
+            \\
+            x_2 &= 1/16 - 1/4(1/20)
+            \\
+            &= 1/20
+            \\
+            x &= 
+            \begin{bmatrix}
+                1/4\\
+                1/16\\
+                1/20\\
+            \end{bmatrix}
+        \end{split}
+    \]
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+        Let
+            \[
+                \begin{split}
+                    A &=
+                    \begin{bmatrix}
+                        \alpha & 1 & 0\\
+                        \beta & 2 & 1\\
+                        0 & 1 & 2\\
+                    \end{bmatrix}
+                \end{split}
+            \]
+        Find all values of \(\alpha\) and \(\beta\) such that 
+        \begin{enumerate}[a)]
+            \item A is singular (non-invertible)
+            \item A is symmetric
+            \item A is strictly diagonally dominant
+            \item A is positive definite
+        \end{enumerate}
+
+        \textbf{Solution}
+        \\
+
+        \begin{enumerate}
+            \item A singular matrix has a determinant of 0.
+                \[
+                    \begin{split}
+                        |A| &= 0
+                        \\
+                        (\alpha*2*2) - (1*1*\alpha + 2*1*\beta) &= 0
+                        \\
+                        4\alpha - \alpha - 2\beta &= 0
+                        \\
+                        \alpha &= (2/3)\beta
+                    \end{split}
+                \]
+                A is singular for all \(\alpha\) and \(\beta\) where \(\alpha = (2/3)\beta\).
+
+            \item A is symmetric for \(\alpha = 2\) and \(\beta = 1\).
+
+            \item A is strictly diagonally dominant if its determinant is nonzero. From a), A is strictly diagonally dominant when \(\alpha \neq (2/3)\beta\).
+
+            \item Whaaa?
+        \end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+    \begin{enumerate}[a)]
+        \item Find \(||x||_\infty\) and \(||x||_2\) for \(x=[\cos(k),\sin(k),e^k]^T\) and a \(k\) a positive integer.
+
+        \item Find \(||A||_\infty\) for
+            \[
+                \begin{split}
+                    A &=
+                    \begin{bmatrix}
+                        2 & -1 & 0\\
+                        -1 & 2 & -1\\
+                        0 & -1 & 2\\
+                    \end{bmatrix}
+                \end{split}
+            \]
+    \end{enumerate}
+
+    \textbf{Part a}
+    \\
+
+    \textbf{Part b}
+\end{homeworkProblem}
+
+
+%\pagebreak
+%\section{Appendix}
+
+\end{document}
