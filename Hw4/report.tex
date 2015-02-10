@@ -450,10 +450,10 @@
             \item A is positive definite
         \end{enumerate}
 
-        \textbf{Solution}
-        \\
 
-        \begin{enumerate}
+        \textbf{Solution}
+
+    \begin{enumerate}[a)]
             \item A singular matrix has a determinant of 0.
                 \[
                     \begin{split}
@@ -472,7 +472,33 @@
 
             \item A is strictly diagonally dominant if its determinant is nonzero. From a), A is strictly diagonally dominant when \(\alpha \neq (2/3)\beta\).
 
-            \item Whaaa?
+            \item A is positive definite if every principal submatrix of A has a positive determinant.
+            From a), the largest submatrix has a positive determinant when \(\alpha > (2/3)\beta\).
+            The second submatrix is 
+            \[
+                \begin{split}
+                    A_b &=
+                    \begin{bmatrix}
+                        \alpha & 1\\
+                        \beta & 2\\
+                    \end{bmatrix}
+                \end{split}
+            \]
+
+            And the determinant is \(2\alpha - \beta\), so this is positive when \(\alpha > (1/2)\beta\).
+            The final submatrix is simply
+            \[
+                \begin{split}
+                    A_c &=
+                    \begin{bmatrix}
+                        \alpha\\
+                    \end{bmatrix}
+                \end{split}
+            \]
+
+            Which has positive determinant when \(\alpha > 0\).
+
+            Therefore, A is positive definite when \(\alpha > 0\) and \(\alpha > (2/3)\beta\).
         \end{enumerate}
 \end{homeworkProblem}
 
@@ -495,8 +521,36 @@
 
     \textbf{Part a}
     \\
+    
+    \(||\vec{x}||_\infty\) is determined by
+    \[
+        \begin{split}
+            ||\vec{x}||_\infty &= \max_{1 \leq i \leq n}|x_i|\\
+        \end{split}
+    \]
+
+    \(\cos(k)\) and \(\sin(k)\) will oscillate between -1 and 1, but \(e^k\) will increase as \(k\) increases.
+    Therefore, \(||\vec{x}||_\infty = e^k\).
+    \\
+
+    \(||\vec{x}||_2\), the Euclidean norm, is
+    \[
+        \begin{split}
+            ||\vec{x}||_2 &= \sqrt{\cos^2(k) + \sin^2(k) + e^{2k}}
+        \end{split}
+    \]
+    \\
 
     \textbf{Part b}
+    \\
+
+    \[
+        \begin{split}
+            ||A||_\infty &= \max_{1 \leq i \leq n} \sum_{j=1}^n |a_{ij}|\\
+            &= \max(3, 4, 3)\\
+            &= 4
+        \end{split}
+    \]
 \end{homeworkProblem}
 
 
