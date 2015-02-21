@@ -161,8 +161,42 @@
     \textbf{Part a}
     \\
 
+    If \(\rho(T) < 1\), the largest absolute eigen value in \(T\) is less than 1. 
+    \(I -T\) then reverses the signs of each element in \(T\) that does not lie on the diagonal. 
+    Every \(a_{ii}\) for \(i\) in the matrix then becomes \(1 - a_{ii}\).
+    \\
+
+    Multiplying both sides by \(I-T\)
+    \[
+        \begin{split}
+            (I-T)^{-1}(I-T) &= (I + T + T^2 + ..)(I-T)\\
+            I &= I(I-T) + T(I-T) + T^2(I-T)\\
+            &= I-T + T-T^2 + T^2 - T^3 + ...\\
+            I &= I
+        \end{split}
+    \]
+
+    Thus the statement holds.
+    \\
+
     \textbf{Part b}
     \\
+
+%    According to a theorem covered in class, \(\vec{x}\) approaches the unique solution of \(\vec{x} = T\vec{x} + \vec{c}\) if \(\rho(T) < 1\).
+%    It's given in part a) that \(\rho(T) < 1\).
+    Substituting for \(\vec{x}\)
+
+    \[
+        \begin{split}
+            (1 + T + T^2 + T^3 + \dots)\vec{c} &= T(1 + T + T^2 + \dots)\vec{c} + \vec{c}\\
+            1 + T + T^2 + T^3 + \dots &= T(1 + T + T^2 + \dots) + 1\\
+            T + T^2 + T^3 \dots &= T(1 + T + T^2 + \dots)\\
+            T + T^2 + T^3 \dots &= T + T^2 + T^3 + \dots\\
+        \end{split}
+    \]
+
+    The approximation will approach the unique solution because \(\rho(T) < 1\).
+    
 \end{homeworkProblem}
 \begin{homeworkProblem}
     Let \(A\) be a diagonally dominant \(n \times n\) matrix and \(T\) be the matrix constructed from \(A\) corresponding to Jacobi's method. Show that \(||T||_\infty < 1\).
@@ -262,15 +296,15 @@
             x_1^{(2)} &= (1/4)(1/8 -1/8 - 1/4 - 2)\\
             &= (1/4)(-9/4)\\
             &= -9/16\\
-            x_2^{(2)} &= (1/4)(9/16 -1/8 - 1/8 -1)\\
-            &= (1/4)(9/16 - 5/4)\\
-            &= (1/4)(-11/16)\\
-            &= -11/64\\
-            x_3^{(2)} &= (1/5)(-9/16 - 11/64 - 1/4)\\
-            &= (1/5)(-63/64)\\
-            &\approx -.196875\\
-            x_4^{(2)} &= (1/6)(9/16 -11/64 - 0.196875 + 1)\\
-            &\approx 0.198958 
+            x_2^{(2)} &= (1/4)(9/16 - 1/8 + 1/4 -1)\\
+            &= (1/4)(9/16 - 7/8)\\
+            &= (1/4)(-5/16)\\
+            &= -5/64\\
+            x_3^{(2)} &= (1/5)(-9/16 - 5/64 - 1/4)\\
+            &= (1/5)(-57/64)\\
+            &\approx -.178125\\
+            x_4^{(2)} &= (1/6)(9/16 -5/64 + 0.178215+ 1)\\
+            &\approx 0.27708
         \end{split}
     \]
     
