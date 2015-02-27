@@ -256,6 +256,42 @@ Use \(x^{(0)} = (-1,0,1)^t\).
 \textbf{Solution}
 \\
 
+Using the python script
+\lstinputlisting[language=python]{svd.py}
+we get the following output:
+\lstinputlisting{svd_out.txt}
+
+To create a \(5\times1\), \(1\times1\), and a \(1\times3\) matrix whose product is approximately A, we can just take elements in the manner we discussed in class from our solution provided by the script. This will give us the matrices
+
+\[
+    \begin{bmatrix}
+        -0.547722558\\
+        -0.365148372\\
+        -0.547722558\\
+        -0.365148372\\
+        -0.365148372
+    \end{bmatrix}
+    ,
+    \begin{bmatrix}
+        2.23505798
+    \end{bmatrix}
+    ,
+    \begin{bmatrix}
+        -0.408248290 & -0.816496581 & -0.408248290\\
+    \end{bmatrix}
+\]
+
+The product of these matrices is the matrix
+\[
+    \begin{bmatrix}
+        0.5 & 1 & 0.5\\
+        0.33333 & 0.66667 & 0.33333\\
+        0.5 & 1 & 0.5\\
+        0.33333 & 0.66667 & 0.33333\\
+        0.33333 & 0.66667 & 0.33333\\
+    \end{bmatrix}
+\]
+
 \end{homeworkProblem}
 
 %\pagebreak
