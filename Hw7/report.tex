@@ -148,15 +148,31 @@
     Consider the nonlinear system
     \[
         \begin{split}
-            5x^2 - x^2 &= 0\\
+            5x_1^2 - x_2^2 &= 0\\
             x_2 - (\sin(x_1) + \cos(x_2))/4 &= 0
         \end{split}
     \]
 
     \begin{enumerate}[a)]
         \item Find a function \(G(\vec{x})\) and a set \(D\) in \(\mathbb{R}^2\) such that \(G\) has a unique fixed point in \(D\).
-        \item Estimate the number of iterations required to approximate the exact solution within \(10^{-5}\) in the \(||\cdot||_\infty\) norm, give nany initial guess in \(D\).
+        \item Estimate the number of iterations required to approximate the exact solution within \(10^{-5}\) in the \(||\cdot||_\infty\) norm, given any initial guess in \(D\).
     \end{enumerate}
+
+    \textbf{Part a}
+    \\
+    \[
+        \begin{split}
+            G(\vec{x}) &= L(\vec{x})\\
+            &= 
+            \begin{bmatrix}
+                5x_1^2 - x_2^2 + (2x_1)(x_1 - x_1) + (-2x_2)(x_2 - x_2)\\
+                x_2 - (\sin(x_1) + \cos(x_2))/4 + (-\cos(x_1)/4)(x_1 - x_1) + (1 + \sin(x_2))/4(x_2 - x_2)
+            \end{bmatrix}
+        \end{split}
+    \] 
+    \textbf{Part b}
+    \\
+
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
@@ -168,6 +184,11 @@
             e^{-xy} + 20z + \frac{10\pi - 3}{3} &= 0
         \end{split}
     \]
+
+    \textbf{Solution}
+    \\
+
+
 \end{homeworkProblem}
 
 %\pagebreak
