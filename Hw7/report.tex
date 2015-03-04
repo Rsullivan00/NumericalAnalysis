@@ -188,6 +188,113 @@
     \textbf{Solution}
     \\
 
+    \[
+        \begin{split}
+            J &=
+            \begin{bmatrix}
+                3 & -z\sin(yz) & -y\sin(yz)\\
+                8x & 1250y + 2 & 0\\
+                -ye^{-xy} & -xe^{-xy} & 20
+            \end{bmatrix}
+        \end{split}
+    \]
+
+    First iteration
+    \[
+        \begin{split}
+            J(\vec{0}) &=
+            \begin{bmatrix}
+                3 & 0 & 0\\
+                0 & 2 & 0\\
+                0 & 0 & 20
+            \end{bmatrix}
+            \\
+            J(\vec{0})\vec{y} &= -\vec{F}(\vec{0})\\
+            \begin{bmatrix}
+                3 & 0 & 0\\
+                0 & 2 & 0\\
+                0 & 0 & 20
+            \end{bmatrix}
+            \vec{y} &= -\vec{F}(\vec{0})
+            \\
+            \begin{bmatrix}
+                3 & 0 & 0\\
+                0 & 2 & 0\\
+                0 & 0 & 20
+            \end{bmatrix}
+            \vec{y} &= -
+            \begin{bmatrix}
+                3/2\\
+                1\\
+                -\frac{10\pi}{3}
+            \end{bmatrix}
+            \\
+            \vec{y} &= 
+            \begin{bmatrix}
+                9/2\\
+                2\\
+                -\frac{200\pi}{3}
+            \end{bmatrix}
+            \\
+            \vec{x}^{(1)} &= \vec{x}^{(0)} + \vec{y}
+            \\
+            &= 
+            \begin{bmatrix}
+                9/2\\
+                2\\
+                -\frac{200\pi}{3}
+            \end{bmatrix}
+        \end{split}
+    \]
+
+    Second iteration
+    \[
+        \begin{split}
+            J(\vec{x}^{(1)}) &=
+            \begin{bmatrix}
+                3 & 181.38 & -1.73205\\
+                9 & 2502 & 0\\
+                -.000247 & -.0005555 & 20
+            \end{bmatrix}
+            \\
+            J(\vec{x}^{(1)})\vec{y} &= -\vec{F}(\vec{x}^{(1)})\\
+            \begin{bmatrix}
+                3 & 181.38 & -1.73205\\
+                9 & 2502 & 0\\
+                -.000247 & -.0005555 & 20
+            \end{bmatrix}
+            \vec{y} &= -\vec{F}(\vec{x}^{(1)})\\
+            \\
+            \begin{bmatrix}
+                3 & 181.38 & -1.73205\\
+                9 & 2502 & 0\\
+                -.000247 & -.0005555 & 20
+            \end{bmatrix}
+            \vec{y} &= -
+            \begin{bmatrix}
+                3\\
+                -2416\\
+                198.912
+            \end{bmatrix}
+            \\
+            \vec{y} &= 
+            \begin{bmatrix}
+                9/2\\
+                2\\
+                -\frac{200\pi}{3}
+            \end{bmatrix}
+            \\
+            \vec{x}^{(1)} &= \vec{x}^{(0)} + \vec{y}
+            \\
+            &= 
+            \begin{bmatrix}
+                9/2\\
+                2\\
+                -\frac{200\pi}{3}
+            \end{bmatrix}
+        \end{split}
+    \]
+
 
 \end{homeworkProblem}
 
