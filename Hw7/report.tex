@@ -160,19 +160,65 @@
 
     \textbf{Part a}
     \\
+
+    Solving the system of equations for the appropriate \(x\)'s gives us \(G\).
     \[
         \begin{split}
-            G(\vec{x}) &= L(\vec{x})\\
+            G(\vec{x})
             &= 
             \begin{bmatrix}
-                5x_1^2 - x_2^2 + (2x_1)(x_1 - x_1) + (-2x_2)(x_2 - x_2)\\
-                x_2 - (\sin(x_1) + \cos(x_2))/4 + (-\cos(x_1)/4)(x_1 - x_1) + (1 + \sin(x_2))/4(x_2 - x_2)
+                x_2/\sqrt{5}\\
+                (\sin(x_1) + \cos(x_2))/4
             \end{bmatrix}
         \end{split}
     \] 
+
+    Guess:
+    \\
+    \(x_1 \in [0, 1]\) and \( x_2 \in [0, 1]\)
+    \\
+
+    The first equation will be contained in \(D\), as it maps to \([0,1/\sqrt{5}]\). The second equation will always be less than 1/2, so we can conservatively consider it mapping from \(D\) to \([0, 1/2]\), which is contained in \(D\). Therefore, this \(G\) will have a unique fixed point in this chosen \(D\).
+    \\
+
     \textbf{Part b}
     \\
 
+    Speed of convergence of our fixed point iteration is determined by the norm of \(G'\).
+
+    \[
+        \begin{split}
+            G'(\vec{x})
+            &= 
+            \begin{bmatrix}
+                0 & 1/\sqrt{5}\\
+                \cos(x_1)/4 & -\sin(x_2)/4
+            \end{bmatrix}
+        \end{split}
+    \] 
+
+    The largest \(||G'||_\infty\) can be in \(D\) is when \(x_1=0\) and \(x_2=1\), which gives us a norm of approximately 0.460368.
+    \\
+
+    The error is determined by 
+    \[
+        \begin{split}
+            \frac{k^m}{1-k} ||\vec{x}^{(1)} - \vec{x}^{(0)}||_\infty
+            \\
+            \frac{0.460368^m}{0.539632} ||\vec{x}^{(1)} - \vec{x}^{(0)}||_\infty
+        \end{split}
+    \]
+
+    Because all iterations of \(\vec{x}\) will map to \(D\), \(||\vec{x}^{(1)} - \vec{x}^{(0)}||_\infty\) will always be less than 1. Using this, we can solve for an upper bound on the required number of iterations with the accuracy \(10^{-5}\).
+
+    \[
+        \begin{split}
+            \frac{0.460368^m}{0.539632} &= 10^{-5}\\
+            m &= 15.6366
+        \end{split}
+    \]
+
+    Therefore, with 16 iterations, we will reach our required accuracy (although it could potentially converge faster).
 \end{homeworkProblem}
 
 \begin{homeworkProblem}
@@ -192,8 +238,8 @@
         \begin{split}
             J &=
             \begin{bmatrix}
-                3 & -z\sin(yz) & -y\sin(yz)\\
-                8x & 1250y + 2 & 0\\
+                3 & z\sin(yz) & y\sin(yz)\\
+                8x & -1250y + 2 & 0\\
                 -ye^{-xy} & -xe^{-xy} & 20
             \end{bmatrix}
         \end{split}
@@ -222,7 +268,7 @@
                 0 & 2 & 0\\
                 0 & 0 & 20
             \end{bmatrix}
-            \vec{y} &= -
+            \vec{y} &= 
             \begin{bmatrix}
                 3/2\\
                 1\\
@@ -231,18 +277,18 @@
             \\
             \vec{y} &= 
             \begin{bmatrix}
-                9/2\\
-                2\\
-                -\frac{200\pi}{3}
+                1/2\\
+                1/2\\
+                -\frac{\pi}{6}
             \end{bmatrix}
             \\
             \vec{x}^{(1)} &= \vec{x}^{(0)} + \vec{y}
             \\
             &= 
             \begin{bmatrix}
-                9/2\\
-                2\\
-                -\frac{200\pi}{3}
+                1/2\\
+                1/2\\
+                -\frac{\pi}{6}
             \end{bmatrix}
         \end{split}
     \]
@@ -252,45 +298,45 @@
         \begin{split}
             J(\vec{x}^{(1)}) &=
             \begin{bmatrix}
-                3 & 181.38 & -1.73205\\
-                9 & 2502 & 0\\
-                -.000247 & -.0005555 & 20
+                3 & 0.135517 & -0.12941\\
+                4 & -623 & 0\\
+                -0.3894 & -0.3894 & 20
             \end{bmatrix}
             \\
             J(\vec{x}^{(1)})\vec{y} &= -\vec{F}(\vec{x}^{(1)})\\
             \begin{bmatrix}
-                3 & 181.38 & -1.73205\\
-                9 & 2502 & 0\\
-                -.000247 & -.0005555 & 20
+                3 & 0.135517 & -0.12941\\
+                4 & -623 & 0\\
+                -0.3894 & -0.3894 & 20
             \end{bmatrix}
             \vec{y} &= -\vec{F}(\vec{x}^{(1)})\\
             \\
             \begin{bmatrix}
-                3 & 181.38 & -1.73205\\
-                9 & 2502 & 0\\
-                -.000247 & -.0005555 & 20
+                3 & 0.135517 & -0.12941\\
+                4 & -623 & 0\\
+                -0.3894 & -0.3894 & 20
             \end{bmatrix}
-            \vec{y} &= -
+            \vec{y} &= 
             \begin{bmatrix}
-                3\\
-                -2416\\
-                198.912
+                -0.034074\\
+                155.25\\
+                0.221199
             \end{bmatrix}
             \\
             \vec{y} &= 
             \begin{bmatrix}
-                9/2\\
-                2\\
-                -\frac{200\pi}{3}
+                0.0001667\\
+                -0.249196\\
+                0.0062113\\
             \end{bmatrix}
             \\
-            \vec{x}^{(1)} &= \vec{x}^{(0)} + \vec{y}
+            \vec{x}^{(2)} &= \vec{x}^{(1)} + \vec{y}
             \\
             &= 
             \begin{bmatrix}
-                9/2\\
-                2\\
-                -\frac{200\pi}{3}
+                0.5001667\\
+                0.2508036\\
+                -0.523432\\
             \end{bmatrix}
         \end{split}
     \]
