@@ -1,0 +1,12 @@
+[submodule "Project1"]
+    path = Project1
+    url = https://git.overleaf.com/2136271trqcnt
+
+[submodule "Project2"]
+    path = Project2
+    url = https://git.overleaf.com/2277269fkkcbs
+
+[submodule "Project3"]
+    path = Project3
+    url = https://git.overleaf.com/2359600kcbvkd
+
